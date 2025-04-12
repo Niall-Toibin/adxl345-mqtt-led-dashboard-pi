@@ -47,6 +47,16 @@ int main(int argc, char* argv[]) {
     opts.cleansession = 1;
     opts.username = AUTHMETHOD;
     opts.password = AUTHTOKEN;
+
+    MQTTClient_willOptions will_opts = MQTTClient_willOptions_initializer;
+    will_opts.struct_version = 0; 
+    will_opts.topicName = "een1071/LastWill";
+    will_opts.message   = "Publisher disconnected unexpectedly";
+    will_opts.qos       = QOS;
+    will_opts.retained  = 0;
+    opts.will = &will_opts;
+
+    
     int rc;
     if ((rc = MQTTClient_connect(client, &opts)) != MQTTCLIENT_SUCCESS) {
         cout << "Failed to connect, return code " << rc << endl;
