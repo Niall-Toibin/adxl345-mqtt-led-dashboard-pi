@@ -9,6 +9,7 @@
 
 #define CPU_TEMP "/sys/class/thermal/thermal_zone0/temp"
 using namespace std;
+using namespace exploringRPi;
 
 #define ADDRESS "tcp://192.168.1.121:1883"
 #define CLIENTID "rpi1"
