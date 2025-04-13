@@ -10,7 +10,7 @@ using namespace std;
 #define CLIENTID   "led"
 #define AUTHMETHOD "niall"
 #define AUTHTOKEN  "tkno2mmg"
-#define TOPIC      "een1071/test"
+#define TOPIC      "een1071/pitch"
 #define QOS        1
 #define TIMEOUT    10000L
 

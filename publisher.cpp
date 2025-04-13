@@ -16,8 +16,10 @@ using namespace exploringRPi;
 #define AUTHMETHOD "niall"
 #define AUTHTOKEN "tkno2mmg"
 #define TOPIC "een1071/test"
+#define PITCH_TOPIC "een1071/pitch"
 #define QOS 1
 #define TIMEOUT 10000L
+
 
 
 float getCPUTemperature() { // get the CPU temperature
@@ -86,7 +88,18 @@ int main(int argc, char* argv[]) {
          << " seconds for publication of " << str_payload
          << " on topic " << TOPIC << " for ClientID: " << CLIENTID << endl;
     rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
-    cout << "Message with token " << (int)token << " delivered." << endl;
+
+    // Publishes just the pitch to topic een1071/pitch
+    char pitch_payload[256];
+    snprintf(pitch_payload, sizeof(pitch_payload),
+             "{\"d\":{\"pitch\":%.2f}}", pitch);
+
+    pubmsg.payload = pitch_payload;
+    pubmsg.payloadlen = (int)strlen(pitch_payload);
+    // same QoS, etc.
+    MQTTClient_publishMessage(client, PITCH_TOPIC, &pubmsg, &token);
+    cout << "Publishing pitch-only to " << PITCH_TOPIC << endl;
+    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
     MQTTClient_disconnect(client, 10000);
     MQTTClient_destroy(&client);
     return rc;
