@@ -31,8 +31,8 @@ float getPitch(const char* payload) {
     return atof(found + 8);
 }
 
-struct gpiod_chip *chip;
-struct gpiod_line *line;
+struct gpiod_chip *chip = nullptr;
+struct gpiod_line *line = nullptr;
 
 // Prints topic & payload, extracts pitch value & controls GPIO pin
 int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
@@ -71,6 +71,14 @@ void connlost(void *context, char *cause) {
 }
 
 int main(int argc, char* argv[]) {
+
+    // Open chip and line
+    chip = gpiod_chip_open("/dev/gpiochip0");
+    line = gpiod_chip_get_line(chip, 17);
+
+    gpiod_line_request_output(line, "led_actuator", 0);
+
+
     MQTTClient client;
     MQTTClient_connectOptions opts = MQTTClient_connectOptions_initializer;
     int rc;
