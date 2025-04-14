@@ -108,7 +108,27 @@ void MainWindow::on_MQTTmessage(QString payload){
     ui->outputText->appendPlainText(payload);
     ui->outputText->ensureCursorVisible();
 
-    //ADD YOUR CODE HERE
+    // Read field from combo box
+    QString field = ui->comboBox->currentText();
+
+    QJsonDocument Jsondocument = QJsonDocument::fromJson(payload.toUtf8());
+    if (!Jsondocument.isNull())
+    {
+        QJsonObject robj = Jsondocument.object();
+        QJsonObject dObj = robj["d"].toObject();
+        double sensorValue = dObj[field].toDouble();
+        ui->customPlot->yAxis->setLabel(field);
+
+        ui->outputText->appendPlainText(QString("Parsed %1 = %2").arg(field).arg(sensorValue));
+
+        static QTime startTime= QTime::currentTime();
+        double elapsed = startTime.msecsTo(QTime::currentTime()) / 1000;
+
+        ui->customPlot->graph(0)->addData(elapsed, sensorValue);
+        ui->customPlot->graph(0)->rescaleValueAxis(true);
+        ui->customPlot->replot();
+
+    }
 }
 
 void connlost(void *context, char *cause) {
