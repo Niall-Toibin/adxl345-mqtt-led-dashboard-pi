@@ -117,12 +117,18 @@ void MainWindow::on_MQTTmessage(QString payload){
         QJsonObject robj = Jsondocument.object();
         QJsonObject dObj = robj["d"].toObject();
         double sensorValue = dObj[field].toDouble();
-        ui->customPlot->yAxis->setLabel(field);
 
         ui->outputText->appendPlainText(QString("Parsed %1 = %2").arg(field).arg(sensorValue));
 
         static QTime startTime= QTime::currentTime();
         double elapsed = startTime.msecsTo(QTime::currentTime()) / 1000;
+
+        // Map to  user friendly labels
+        QMap<QString, QString> labelMap;
+        labelMap["pitch"] = "Pitch (degrees)";
+        labelMap["roll"] = "Roll (degrees)";
+        labelMap["temp"] = "Temperature (C)";
+        ui->customPlot->yAxis->setLabel(labelMap.value(field, field));
 
         ui->customPlot->graph(0)->addData(elapsed, sensorValue);
         ui->customPlot->graph(0)->rescaleValueAxis(true);
