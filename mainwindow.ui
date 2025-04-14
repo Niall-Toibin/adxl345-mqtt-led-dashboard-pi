@@ -136,7 +136,7 @@
     </item>
     <item>
      <property name="text">
-      <string>temp</string>
+      <string>tempC</string>
      </property>
     </item>
    </widget>

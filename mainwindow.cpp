@@ -123,11 +123,11 @@ void MainWindow::on_MQTTmessage(QString payload){
         static QTime startTime= QTime::currentTime();
         double elapsed = startTime.msecsTo(QTime::currentTime()) / 1000;
 
-        // Map to  user friendly labels
+        // Label map converts comboBox field to user friendly label
         QMap<QString, QString> labelMap;
         labelMap["pitch"] = "Pitch (degrees)";
         labelMap["roll"] = "Roll (degrees)";
-        labelMap["temp"] = "Temperature (C)";
+        labelMap["tempC"] = "Temperature (C)";
         ui->customPlot->yAxis->setLabel(labelMap.value(field, field));
 
         ui->customPlot->graph(0)->addData(elapsed, sensorValue);
