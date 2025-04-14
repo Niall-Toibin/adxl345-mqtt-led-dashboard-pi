@@ -70,8 +70,12 @@ void MainWindow::on_connectButton_clicked()
     if ((rc = MQTTClient_connect(client, &opts)) != MQTTCLIENT_SUCCESS) {
         ui->outputText->appendPlainText(QString("Failed to connect, return code %1").arg(rc));
     }
-    ui->outputText->appendPlainText(QString("Subscribing to topic " TOPIC " for client " CLIENTID));
-    int x = MQTTClient_subscribe(client, TOPIC, QOS);
+    QString userTopic = ui->topicLineEdit->text().trimmed();
+    if (userTopic.isEmpty())
+        userTopic = TOPIC;
+
+    ui->outputText->appendPlainText(QString("Subscribing to topic %1 for client %2").arg(userTopic, CLIENTID));
+    int x = MQTTClient_subscribe(client, userTopic.toUtf8().constData(), QOS);
     ui->outputText->appendPlainText(QString("Result of subscribe is %1 (0=success)").arg(x));
 }
 
