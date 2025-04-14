@@ -22,6 +22,7 @@ void delivered(void *context, MQTTClient_deliveryToken dt) {
     deliveredtoken = dt;
 }
 
+
 float getPitch(const char* payload) {
     // searches for 'pitch'
     const char* found = strstr(payload, "\"pitch\":");

@@ -12,6 +12,7 @@
 using namespace std;
 using namespace exploringRPi;
 
+
 #define ADDRESS "tcp://192.168.1.124:1883"
 #define CLIENTID "rpi1"
 #define AUTHMETHOD "niall"
