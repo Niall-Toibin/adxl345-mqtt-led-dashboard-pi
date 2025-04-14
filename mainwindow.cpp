@@ -131,7 +131,21 @@ void MainWindow::on_MQTTmessage(QString payload){
         ui->customPlot->yAxis->setLabel(labelMap.value(field, field));
 
         ui->customPlot->graph(0)->addData(elapsed, sensorValue);
-        ui->customPlot->graph(0)->rescaleValueAxis(true);
+
+        if (field == "pitch") {
+            ui->customPlot->yAxis->setRange(-180, 180);
+        }
+        else if (field == "roll") {
+            ui->customPlot->yAxis->setRange(-180, 180);
+        }
+        else if (field == "tempC") {
+            double temprange = 5.0;
+            ui->customPlot->yAxis->setRange(30, 60);
+        }
+        else {
+            ui->customPlot->graph(0)->rescaleValueAxis(true);
+        }
+
         ui->customPlot->replot();
 
     }
