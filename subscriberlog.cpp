@@ -6,7 +6,8 @@
 #include <iostream>
 using namespace std;
 
-#define ADDRESS    "tcp://192.168.1.121:1883"
+// Change address to machine running broker
+#define ADDRESS    "tcp://192.168.1.124:1883"
 #define CLIENTID   "logger"
 #define AUTHMETHOD "niall"
 #define AUTHTOKEN  "tkno2mmg"

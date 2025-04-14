@@ -6,7 +6,7 @@
 #include <gpiod.h>
 using namespace std;
 
-#define ADDRESS    "tcp://192.168.1.121:1883"
+#define ADDRESS    "tcp://192.168.1.124:1883"
 #define CLIENTID   "led"
 #define AUTHMETHOD "niall"
 #define AUTHTOKEN  "tkno2mmg"
