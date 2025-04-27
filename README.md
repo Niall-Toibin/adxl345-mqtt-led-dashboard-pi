@@ -120,7 +120,8 @@ Parsed tempC = 52.10
 - Add sliding window X axis
 
 ## License
-MIT License © 2025 Niall Tóibín  
+2025 Niall Tóibín 
+
 Built using Qt 5.15, Paho MQTT, and standard C++17 libraries.
 
 
