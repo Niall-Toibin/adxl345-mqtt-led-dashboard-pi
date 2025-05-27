@@ -92,8 +92,6 @@ The GUI allows the user to:
 - Watch data plotted dynamically with autoscaling y-axis
 - Monitor raw JSON payload in real time
 
-📷 See `demo.mp4` or the `video/` folder for a full walkthrough.
-
 ## Sample Output
 ### JSON
 ```json
